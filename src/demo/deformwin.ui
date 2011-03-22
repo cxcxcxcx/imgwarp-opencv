@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DeformWin</class>
+ <widget class="QMainWindow" name="DeformWin">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>666</width>
+    <height>389</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Image Deformation Demo</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0" rowspan="2">
+     <widget class="QTabWidget" name="tabMain">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tabEdit">
+       <attribute name="title">
+        <string>Edit</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="SinglePhotoView" name="viewPointEdit"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabView">
+       <attribute name="title">
+        <string>View</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QGraphicsView" name="graphShow"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QFrame" name="frame">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>250</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Deform Alg</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" colspan="2">
+        <widget class="QComboBox" name="cmbDeformAlg">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <item>
+          <property name="text">
+           <string>MLS Similarity</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>MLS Rigid</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Piecewise Affine</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Alpha Value</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QDoubleSpinBox" name="spinAlpha">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="minimum">
+          <double>0.100000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>3.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+         <property name="value">
+          <double>1.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Grid Size</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QSlider" name="SldGrid">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>20</number>
+         </property>
+         <property name="value">
+          <number>5</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3" colspan="2">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>5</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Interp Alg</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QComboBox" name="cmbInterpAlg">
+         <item>
+          <property name="text">
+           <string>Bilinear</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Nearest</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Opacity</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" colspan="3">
+        <widget class="QSlider" name="SldOpacity">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="value">
+          <number>50</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="4">
+        <widget class="QLabel" name="label_7">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>50</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2" colspan="2">
+        <widget class="QCheckBox" name="chkPreview">
+         <property name="text">
+          <string>Preview</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="5">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Add Points:&lt;/span&gt; Ctrl+Click&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remove Last:&lt;/span&gt; Shift+Click&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Left button   -- target&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Right button --  source&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>View Result</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>666</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>&amp;Points</string>
+    </property>
+    <addaction name="actClearAllPt"/>
+    <addaction name="actCpSrcPtToDst"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actNewProj"/>
+    <addaction name="actOpenProj"/>
+    <addaction name="actSaveProj"/>
+    <addaction name="actSaveProjAs"/>
+    <addaction name="actExportPic"/>
+    <addaction name="separator"/>
+    <addaction name="actExit"/>
+   </widget>
+   <addaction name="menu_2"/>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actCpSrcPtToDst">
+   <property name="text">
+    <string>Set Target Points = Source Points</string>
+   </property>
+  </action>
+  <action name="actClearAllPt">
+   <property name="text">
+    <string>&amp;Clear All Points</string>
+   </property>
+  </action>
+  <action name="actNewProj">
+   <property name="text">
+    <string>&amp;New...</string>
+   </property>
+  </action>
+  <action name="actOpenProj">
+   <property name="text">
+    <string>&amp;Open...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actSaveProj">
+   <property name="text">
+    <string>&amp;Save...</string>
+   </property>
+  </action>
+  <action name="actSaveProjAs">
+   <property name="text">
+    <string>Save &amp;as...</string>
+   </property>
+  </action>
+  <action name="actExportPic">
+   <property name="text">
+    <string>&amp;Export...</string>
+   </property>
+  </action>
+  <action name="actExit">
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SinglePhotoView</class>
+   <extends>QGraphicsView</extends>
+   <header>singlephotoview.h</header>
+   <slots>
+    <signal>pointsUpdated()</signal>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>viewPointEdit</sender>
+   <signal>pointsUpdated()</signal>
+   <receiver>DeformWin</receiver>
+   <slot>updateEditImg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>211</x>
+     <y>270</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>226</x>
+     <y>320</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinAlpha</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DeformWin</receiver>
+   <slot>updateEditImg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>616</x>
+     <y>193</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>282</x>
+     <y>26</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SldGrid</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>DeformWin</receiver>
+   <slot>updateEditImg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>616</x>
+     <y>221</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>357</x>
+     <y>318</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbDeformAlg</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>DeformWin</receiver>
+   <slot>updateEditImg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>622</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>564</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SldGrid</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_5</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>616</x>
+     <y>221</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>646</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkPreview</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SldOpacity</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>622</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>622</x>
+     <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkPreview</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>DeformWin</receiver>
+   <slot>updateEditImg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>622</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>358</x>
+     <y>344</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SldOpacity</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>DeformWin</receiver>
+   <slot>updateEditImg()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>622</x>
+     <y>283</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>372</x>
+     <y>365</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>chkPreview</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_7</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>548</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>646</x>
+     <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SldOpacity</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>label_7</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>622</x>
+     <y>283</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>646</x>
+     <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateEditImg()</slot>
+ </slots>
+</ui>

@@ -37,7 +37,7 @@ public:
 	Mat setAllAndGenerate(const Mat & oriImg,
 			const vector< Point_<int> > &qsrc,
 			const vector< Point_<int> > &qdst,
-			const int outW, const int outH, 
+			const int outW, const int outH,
 			const double transRatio = 1);
 
 	//! Generate the warped image.
@@ -47,37 +47,38 @@ public:
 	 */
     Mat genNewImg(const Mat & oriImg, double transRatio);
 
+	//! Calculate delta value which will be used for generating the warped image.
+    virtual void calcDelta()=0;
+
 	//! Parameter for MLS.
     double alpha;
-	
+
 	//! Parameter for MLS.
     int gridSize;
 
-protected:
+	//! Set the list of target points
+    void setDstPoints(const vector< Point_< int > > &qdst);
+
     //! Set the list of source points
 	void setSrcPoints(const vector< Point_< int > > &qsrc);
 
-	//! Set the list of target points
-    void setDstPoints(const vector< Point_< int > > &qdst);
-    
+	//! The size of the original image. For precalculation.
+    void setSize(int w, int h){srcW=w, srcH=h;}
+
 	//! The size of output image
     void setTargetSize(const int outW, const int outH){
         tarW = outW;
         tarH = outH;
     }
 
-	//! The size of the original image. For precalculation.
-    void setSize(int w, int h){srcW=w, srcH=h;}
-
-	//! Calculate delta value which will be used for generating the warped image.
-    virtual void calcDelta()=0;
+protected:
 
     vector< Point_< double > > oldDotL, newDotL;
 
     int nPoint;
 
     Mat_<double> /*! \brief delta_x */rDx, /*! \brief delta_y */rDy;
-    
+
     int srcW, srcH;
     int tarW, tarH;
 };

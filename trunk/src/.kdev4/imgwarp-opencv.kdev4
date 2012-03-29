@@ -10,3 +10,6 @@ CurrentBuildType=Debug
 CurrentInstallDir=
 Extra Arguments=
 ProjectRootRelative=./
+
+[Project]
+VersionControlSupport=kdevsubversion

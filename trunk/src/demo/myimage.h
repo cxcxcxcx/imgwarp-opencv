@@ -2,8 +2,10 @@
 #define MYIMAGE_H
 
 #include <QImage>
+#include <vector>
 #include <cv.h>
 using cv::Mat;
+using cv::vector;
 
 class MyImage : public QImage
 {

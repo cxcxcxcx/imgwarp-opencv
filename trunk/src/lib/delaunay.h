@@ -8,6 +8,7 @@
  */
 
 #include "cv.h"
+#include "opencv2/legacy/legacy.hpp"
 #include <vector>
 #include <set>
 #include <map>

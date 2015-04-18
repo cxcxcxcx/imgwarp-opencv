@@ -26,11 +26,9 @@ using cv::Mat_;
 using cv::Point_;
 
 //! The class for MLS Similarity transform.
-class ImgWarp_MLS_Similarity : public ImgWarp_MLS
-{
-public:
+class ImgWarp_MLS_Similarity : public ImgWarp_MLS {
+   public:
     void calcDelta();
 };
 
-
-#endif // IMGTRANS_MLS_SIMILARITY_H
+#endif  // IMGTRANS_MLS_SIMILARITY_H

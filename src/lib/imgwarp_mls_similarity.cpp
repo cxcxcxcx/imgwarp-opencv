@@ -16,36 +16,35 @@
 
 #include "imgwarp_mls_similarity.h"
 
-
-void ImgWarp_MLS_Similarity::calcDelta(){
+void ImgWarp_MLS_Similarity::calcDelta() {
     int i, j, k;
 
-    Point_< double > swq, qstar, newP, tmpP;
+    Point_<double> swq, qstar, newP, tmpP;
     double sw;
 
-    double *w=new double[nPoint];
+    double *w = new double[nPoint];
 
     rDx.create(tarH, tarW);
     rDy.create(tarH, tarW);
 
-	if (nPoint < 2){
-		rDx.setTo(0);
-		rDy.setTo(0);
-		return;
-	}
+    if (nPoint < 2) {
+        rDx.setTo(0);
+        rDy.setTo(0);
+        return;
+    }
 
-    Point_< double > swp, pstar, curV, curVJ, Pi, PiJ;
+    Point_<double> swp, pstar, curV, curVJ, Pi, PiJ;
     double miu_s;
 
-    for (i = 0; ; i+=gridSize){
-        if (i>=tarW && i<tarW+gridSize - 1)
-            i=tarW-1;
-        else if (i>=tarW)
+    for (i = 0;; i += gridSize) {
+        if (i >= tarW && i < tarW + gridSize - 1)
+            i = tarW - 1;
+        else if (i >= tarW)
             break;
-        for (j = 0; ; j+=gridSize){
-            if (j>=tarH && j<tarH+gridSize - 1)
+        for (j = 0;; j += gridSize) {
+            if (j >= tarH && j < tarH + gridSize - 1)
                 j = tarH - 1;
-            else if (j>=tarH)
+            else if (j >= tarH)
                 break;
             sw = 0;
             swp.x = swp.y = 0;
@@ -53,27 +52,24 @@ void ImgWarp_MLS_Similarity::calcDelta(){
             newP.x = newP.y = 0;
             curV.x = i;
             curV.y = j;
-            for (k = 0; k < nPoint; k++){
-                if ((i==oldDotL[k].x) && j==oldDotL[k].y)
-                    break;
-               /* w[k] = pow((i-oldDotL[k].x)*(i-oldDotL[k].x)+
-                        (j-oldDotL[k].y)*(j-oldDotL[k].y), -alpha);*/
-                w[k] = 1/((i-oldDotL[k].x)*(i-oldDotL[k].x)+
-                        (j-oldDotL[k].y)*(j-oldDotL[k].y));
+            for (k = 0; k < nPoint; k++) {
+                if ((i == oldDotL[k].x) && j == oldDotL[k].y) break;
+                /* w[k] = pow((i-oldDotL[k].x)*(i-oldDotL[k].x)+
+                         (j-oldDotL[k].y)*(j-oldDotL[k].y), -alpha);*/
+                w[k] = 1 / ((i - oldDotL[k].x) * (i - oldDotL[k].x) +
+                            (j - oldDotL[k].y) * (j - oldDotL[k].y));
                 sw = sw + w[k];
                 swp = swp + w[k] * oldDotL[k];
                 swq = swq + w[k] * newDotL[k];
             }
-            if ( k == nPoint ) {
-                pstar = (1 / sw) * swp ;
-                qstar = 1/sw * swq;
-    //            qDebug("pstar: (%f, %f)", pstar[0], pstar[1]);
+            if (k == nPoint) {
+                pstar = (1 / sw) * swp;
+                qstar = 1 / sw * swq;
 
                 // Calc miu_s
                 miu_s = 0;
-                for (k = 0; k < nPoint; k++){
-                    if (i==oldDotL[k].x && j==oldDotL[k].y)
-                        continue;
+                for (k = 0; k < nPoint; k++) {
+                    if (i == oldDotL[k].x && j == oldDotL[k].y) continue;
 
                     Pi = oldDotL[k] - pstar;
                     miu_s += w[k] * Pi.dot(Pi);
@@ -82,23 +78,21 @@ void ImgWarp_MLS_Similarity::calcDelta(){
                 curV -= pstar;
                 curVJ.x = -curV.y, curVJ.y = curV.x;
 
-                for (k = 0; k < nPoint; k++){
-                    if (i==oldDotL[k].x && j==oldDotL[k].y)
-                        continue;
+                for (k = 0; k < nPoint; k++) {
+                    if (i == oldDotL[k].x && j == oldDotL[k].y) continue;
 
                     Pi = oldDotL[k] - pstar;
                     PiJ.x = -Pi.y, PiJ.y = Pi.x;
 
-                    tmpP.x = Pi.dot(curV) * newDotL[k].x
-                             - PiJ.dot(curV) * newDotL[k].y;
-                    tmpP.y = -Pi.dot(curVJ) * newDotL[k].x
-                             + PiJ.dot(curVJ) * newDotL[k].y;
-                    tmpP *= w[k]/miu_s;
+                    tmpP.x = Pi.dot(curV) * newDotL[k].x -
+                             PiJ.dot(curV) * newDotL[k].y;
+                    tmpP.y = -Pi.dot(curVJ) * newDotL[k].x +
+                             PiJ.dot(curVJ) * newDotL[k].y;
+                    tmpP *= w[k] / miu_s;
                     newP += tmpP;
                 }
                 newP += qstar;
-            }
-            else {
+            } else {
                 newP = newDotL[k];
             }
 
@@ -107,6 +101,5 @@ void ImgWarp_MLS_Similarity::calcDelta(){
         }
     }
 
-    delete [] w;
-    // cout<<rDx<<endl;
+    delete[] w;
 }

@@ -88,7 +88,7 @@ bool DeformWin::calcWarpedImg(){
 		curImg = oriImg;
 		return false;
 	}
-	
+
     ImgWarp_MLS *imgTrans;
     if (ui->cmbDeformAlg->currentText()==QString("MLS Similarity")){
         imgTrans = new ImgWarp_MLS_Similarity();
@@ -154,8 +154,9 @@ void DeformWin::on_actClearAllPt_triggered()
 void DeformWin::on_actNewProj_triggered()
 {
     QString fileName;
-    fileName = QFileDialog::getOpenFileName(this,
-               tr("Open Image"), "./", tr("Image Files (*.jpg *.gif *.png);;All Files (*.*)"));
+    fileName = QFileDialog::getOpenFileName(
+        this, tr("Open Image"), "./",
+        tr("Image Files (*.jpg *.gif *.png);;All Files (*.*)"));
     ui->viewPointEdit->setImage(fileName);
     ui->viewPointEdit->clearAllPoints();
     pFile.picSrc = fileName;
@@ -165,9 +166,10 @@ void DeformWin::on_actNewProj_triggered()
 void DeformWin::on_actOpenProj_triggered()
 {
     QString fileName;
-    fileName = QFileDialog::getOpenFileName(this,
-               tr("Open Project"), "./", tr("Project Files (*.prj);;All Files (*.*)"));
-	qDebug("HERE\n");
+    fileName = QFileDialog::getOpenFileName(
+        this, tr("Open Project"), "./",
+        tr("Project Files (*.prj);;All Files (*.*)"));
+        qDebug("HERE\n");
     pFile.open(fileName);
 
     ui->viewPointEdit->setImage(pFile.picSrc);
@@ -178,8 +180,9 @@ void DeformWin::on_actOpenProj_triggered()
 void DeformWin::on_actSaveProj_triggered()
 {
     if (pFile.fileName == ""){
-        pFile.fileName = QFileDialog::getSaveFileName(this,
-            tr("Save Project..."), "./", tr("Project Files (*.prj);;All Files (*.*)"));
+        pFile.fileName = QFileDialog::getSaveFileName(
+            this, tr("Save Project..."), "./",
+            tr("Project Files (*.prj);;All Files (*.*)"));
         qDebug(pFile.fileName.toStdString().c_str());
         if (!pFile.fileName.endsWith(".prj"))
             pFile.fileName.append(".prj");
@@ -191,8 +194,9 @@ void DeformWin::on_actSaveProj_triggered()
 
 void DeformWin::on_actSaveProjAs_triggered()
 {
-    pFile.fileName = QFileDialog::getSaveFileName(this,
-            tr("Save Project..."), "./", tr("Project Files (*.prj);;All Files (*.*)"));
+    pFile.fileName = QFileDialog::getSaveFileName(
+        this, tr("Save Project..."), "./",
+        tr("Project Files (*.prj);;All Files (*.*)"));
     qDebug(pFile.fileName.toStdString().c_str());
     if (!pFile.fileName.endsWith(".prj"))
         pFile.fileName.append(".prj");
@@ -207,7 +211,7 @@ void DeformWin::on_actExportPic_triggered()
 		// TODO: show some hint here.
 		return;
 	}
-	
+
     QString filename;
     filename = QFileDialog::getSaveFileName(this,
         tr("Export Picture..."), "./", tr("PNG Files (*.png);;All Files (*.*)"));

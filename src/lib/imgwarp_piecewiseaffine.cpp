@@ -1,8 +1,6 @@
 #include "imgwarp_piecewiseaffine.h"
 #include "delaunay.h"
 
-#include "highgui.h"
-
 using cv::Point2d;
 
 ImgWarp_PieceWiseAffine::ImgWarp_PieceWiseAffine(void) {
@@ -112,25 +110,26 @@ void ImgWarp_PieceWiseAffine::calcDelta() {
     // In order preserv the background
     V = ::delaunayDiv(oL1, boundRect);
 
+    // Note: the following code requires highgui. Skipping them.
     //     vector< TriangleInID > Vt;
     // //     vector< Triangle >::iterator it;
     // //     cv::Rect_<int> boundRect(0, 0, tarW, tarH);
     //     Vt = ::delaunayDivInID(oldDotL, boundRect);
-    Mat_<uchar> imgTmp = Mat_<uchar>::zeros(tarH, tarW);
-    for (it = V.begin(); it != V.end(); it++) {
-        cv::line(imgTmp, it->v[0], it->v[1], 255, 1, CV_AA);
-        cv::line(imgTmp, it->v[0], it->v[2], 255, 1, CV_AA);
-        cv::line(imgTmp, it->v[2], it->v[1], 255, 1, CV_AA);
+    //Mat_<uchar> imgTmp = Mat_<uchar>::zeros(tarH, tarW);
+    //for (it = V.begin(); it != V.end(); it++) {
+        //cv::line(imgTmp, it->v[0], it->v[1], 255, 1, cv::LINE_AA);
+        //cv::line(imgTmp, it->v[0], it->v[2], 255, 1, cv::LINE_AA);
+        //cv::line(imgTmp, it->v[2], it->v[1], 255, 1, cv::LINE_AA);
 
-        // Not interested in points outside the region.
-        if (!(it->v[0].inside(boundRect) && it->v[1].inside(boundRect) &&
-              it->v[2].inside(boundRect)))
-            continue;
+        //// Not interested in points outside the region.
+        //if (!(it->v[0].inside(boundRect) && it->v[1].inside(boundRect) &&
+              //it->v[2].inside(boundRect)))
+            //continue;
 
-        cv::fillConvexPoly(imgLabel, it->v, 3,
-                           cv::Scalar_<int>(it - V.begin() + 1));
-    }
-    // imshow("imgTmp", imgTmp);
+        //cv::fillConvexPoly(imgLabel, it->v, 3,
+                           //cv::Scalar_<int>(it - V.begin() + 1));
+    //}
+    //cv::imshow("imgTmp", imgTmp);
     // cvWaitKey(10);
 
     int i, j;

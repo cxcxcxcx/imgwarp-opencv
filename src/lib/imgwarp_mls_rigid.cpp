@@ -29,8 +29,6 @@ void ImgWarp_MLS_Rigid::calcDelta() {
         for (i = 0; i < nPoint; i++) newDotL[i] *= 1 / ratio;
     }
 
-    double *w = new double[nPoint];
-
     rDx.create(tarH, tarW);
     rDy.create(tarH, tarW);
 
@@ -41,6 +39,7 @@ void ImgWarp_MLS_Rigid::calcDelta() {
     }
     Point_<double> swp, pstar, curV, curVJ, Pi, PiJ, Qi;
     double miu_r;
+    std::vector<double> w(nPoint);
 
     for (i = 0;; i += gridSize) {
         if (i >= tarW && i < tarW + gridSize - 1)
@@ -118,7 +117,6 @@ void ImgWarp_MLS_Rigid::calcDelta() {
             }
         }
     }
-    delete[] w;
 
     if (preScale) {
         for (i = 0; i < nPoint; i++) newDotL[i] *= ratio;

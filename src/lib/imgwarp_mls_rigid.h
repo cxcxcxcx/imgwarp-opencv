@@ -17,7 +17,7 @@
 #define IMGTRANS_MLS_RIGID_H
 
 #include "imgwarp_mls.h"
-#include "cv.h"
+#include "opencv2/opencv.hpp"
 #include <vector>
 using std::vector;
 
@@ -35,7 +35,7 @@ class ImgWarp_MLS_Rigid : public ImgWarp_MLS
 public:
     //! Whether do unify scale on the points before deformation
     bool preScale;
-    
+
     ImgWarp_MLS_Rigid();
     void calcDelta();
 };

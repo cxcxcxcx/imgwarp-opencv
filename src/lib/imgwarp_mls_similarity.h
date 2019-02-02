@@ -17,7 +17,7 @@
 #ifndef IMGTRANS_MLS_SIMILARITY_H
 #define IMGTRANS_MLS_SIMILARITY_H
 #include "imgwarp_mls.h"
-#include "cv.h"
+#include "opencv2/opencv.hpp"
 #include <vector>
 using std::vector;
 

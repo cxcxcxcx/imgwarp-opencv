@@ -4,7 +4,6 @@
 #include "imgwarp_piecewiseaffine.h"
 #include "imgwarp_mls_rigid.h"
 #include "imgwarp_mls_similarity.h"
-#include "highgui.h"
 
 #include <QString>
 #include <QFileDialog>
